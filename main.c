@@ -1,4 +1,7 @@
-#include <SDL2/SDL_assert.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <SDL2/SDL.h>
 #include <SDL2/SDL_error.h>
 #include <SDL2/SDL_events.h>
 #include <SDL2/SDL_keyboard.h>
@@ -9,11 +12,12 @@
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_ttf.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
 
-#include <SDL2/SDL.h>
+#define ASSERT(expr) \
+    if ((expr)) \
+    {} \
+    else \
+        printf("AssertErro on line %d\n\t\t%s failed.\n", __LINE__, #expr) \
 
 #define WIN_WIDTH 600
 #define WIN_HEIGHT 450
@@ -140,7 +144,7 @@ Texture *load_texture(Game *game, const char *path)
     Surface *surface = IMG_Load(path);
 
     texture = SDL_CreateTextureFromSurface(game->renderer, surface);
-    SDL_assert(texture != NULL);
+    ASSERT(texture != NULL);
 
     SDL_FreeSurface(surface);
 
@@ -242,10 +246,10 @@ void init_sdl(Game *game)
                                     SDL_WINDOWPOS_CENTERED,
                                     WIN_WIDTH, WIN_HEIGHT,
                                     SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
-    SDL_assert(game->window != NULL);
+    ASSERT(game->window != NULL);
 
     game->renderer = SDL_CreateRenderer(game->window, -1, SDL_RENDERER_ACCELERATED);
-    SDL_assert(game->renderer != NULL);
+    ASSERT(game->renderer != NULL);
 }
 
 void handle_events(Game *game, bool *running)
