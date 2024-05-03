@@ -19,6 +19,14 @@ You will need the following SDL libraries ([found here](https://wiki.libsdl.org/
 
 Run it with `./build.sh && ./game`.
 
+
+## Todo
+
+- [ ] Move assets (texture, fonts and audio) into the "engine" part of the code. The "game" can attach a key (maybe string for hashmap) to the asset in order to request it from the engine.
+- [ ] Improve the keyboard events  that the "game" can access.
+- [ ] Add support for controllers.
+- [ ] Investigate hot-reloading of the game code. This will mean dynamically loading an `.so`, `.dll` or `.dylib` on Startup. The entrypoint will need to be the engine too, accepting the game as an arg or something.
+
 ## Asset Sources
 
 ### Music
