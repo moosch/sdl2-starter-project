@@ -80,21 +80,6 @@ void init_game(Engine *engine, Game *game)
     load_audio(game);
 }
 
-/* void handle_input(Game *game)
-{
-    game->move_direction = 0;
-    game->keyboard_state = SDL_GetKeyboardState(NULL);
-
-    if (game->keyboard_state[SDL_SCANCODE_RIGHT])
-        game->move_direction += RIGHT;
-    if (game->keyboard_state[SDL_SCANCODE_LEFT])
-        game->move_direction += LEFT;
-    if (game->keyboard_state[SDL_SCANCODE_UP])
-        game->move_direction += UP;
-    if (game->keyboard_state[SDL_SCANCODE_DOWN])
-        game->move_direction += DOWN;
-} */
-
 void on_event(Event event)
 {
     if (event.type == KEYDOWN)
@@ -141,11 +126,6 @@ void update(f32 delta_time)
         printf("UP\n");
     if (game.move_direction & DOWN)
         printf("DOWN\n");
-
-
-    // game.move_speed * delta_time;
-
-    // printf("%f\n", delta_time);
 }
 
 /**
@@ -185,43 +165,9 @@ int main(void)
 
     init_game(engine, &game);
 
-    // Color text_color = { 150, 100, 50, 255 };
-    // engine.text = create_text(&engine, "Cheeky Kitty", text_color);
-
     setup_functions(reset, update, draw, render, on_event, on_keypressed, cleanup);
 
     run();
-
-    /* f32 frame_time = 0.0f;
-    u32 previous_time = 0;
-    u32 current_time = 0;
-    f32 delta_time = 0.0f;
-
-    bool running = true;
-
-    while(running)
-    {
-        previous_time = current_time;
-        current_time = SDL_GetTicks(); // Number of ms since start of engine. 
-        delta_time = (current_time - previous_time) / 1000.0f;
-
-        handle_events(&engine, &running);
-
-        frame_time += delta_time;
-
-        // Only update screen on target FPS
-        if (frame_time >= 0.25f)
-        {
-            reset(&engine);
-            handle_input(&engine);
-            update(&engine, delta_time);
-            
-            draw(&engine);
-
-            render(&engine);
-        }
-    }
-    cleanup(&engine); */
 
     return EXIT_SUCCESS;
 }
